@@ -49,7 +49,7 @@
   --g-rgb:255,255,255;--g-pn-rgb:252,252,254;--g-sheen:rgba(255,255,255,.65);--g-stroke:rgba(255,255,255,.75);
   --g-edge:rgba(0,0,0,.07);--g-hl:rgba(255,255,255,.95);--g-shadow:0 8px 26px rgba(30,34,60,.12);--g-solid:rgba(250,250,252,.97);
   /* интенсивность стекла — «средняя» */
-  --g-blur:16px;--g-sat:180%;--g-a:.4;--g-pa:.74;--g-dka:.3;
+  --g-blur:16px;--g-sat:180%;--g-a:.4;--g-pa:.74;--g-dka:.16;
   /* безопасные зоны: Telegram → env() */
   --top:calc(var(--tg-safe-area-inset-top,env(safe-area-inset-top,0px)) + var(--tg-content-safe-area-inset-top,0px));
   --bot:calc(var(--tg-safe-area-inset-bottom,env(safe-area-inset-bottom,0px)) + var(--tg-content-safe-area-inset-bottom,0px));
@@ -71,8 +71,8 @@
   --g-rgb:44,46,58;--g-pn-rgb:30,31,40;--g-sheen:rgba(255,255,255,.12);--g-stroke:rgba(255,255,255,.16);
   --g-edge:rgba(0,0,0,.45);--g-hl:rgba(255,255,255,.26);--g-shadow:0 10px 30px rgba(0,0,0,.45);--g-solid:rgba(28,29,36,.97)}
 /* интенсивность стекла */
-:root[data-glass=low]{--g-blur:8px;--g-sat:140%;--g-a:.62;--g-pa:.88;--g-dka:.5}
-:root[data-glass=high]{--g-blur:26px;--g-sat:210%;--g-a:.22;--g-pa:.6;--g-dka:.18}
+:root[data-glass=low]{--g-blur:8px;--g-sat:140%;--g-a:.62;--g-pa:.88;--g-dka:.3}
+:root[data-glass=high]{--g-blur:26px;--g-sat:210%;--g-a:.22;--g-pa:.6;--g-dka:.06}
 /* размер шрифта в чате */
 :root[data-fs=s]{--chat-fs:14px}:root[data-fs=l]{--chat-fs:18px}
 
@@ -152,8 +152,8 @@ h3{scroll-margin-top:calc(var(--top) + 60px);font-size:13px;color:var(--mute);fo
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity .2s ease-out,transform .4s var(--out);pointer-events:none}.ph img.on{opacity:1;transform:none}
 .bars{position:absolute;top:calc(var(--top) + 26px);left:50%;transform:translateX(-50%);display:flex;gap:4px;width:min(40%,180px);z-index:3}
 .bars i{flex:1;height:3px;border-radius:3px;background:rgba(0,0,0,.42);box-shadow:0 0 0 .5px rgba(255,255,255,.12);transition:background .2s}.bars i.on{background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),transparent 18%,transparent 48%,rgba(0,0,0,.8));pointer-events:none}
-.info{position:absolute;left:calc(18px + var(--sl));right:84px;bottom:calc(var(--bot) + 86px);pointer-events:none;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.14),transparent 12%,transparent 62%,rgba(0,0,0,.22) 78%,rgba(0,0,0,.46));pointer-events:none}
+.info{position:absolute;left:calc(18px + var(--sl));right:84px;bottom:calc(var(--bot) + 86px);pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.35),0 2px 14px rgba(0,0,0,.45)}
 .info h2{font-size:30px;line-height:1.08;margin:0 0 6px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;flex-wrap:wrap;column-gap:10px;text-wrap:balance}
 .info .meta{font-size:14px;opacity:.9;margin:0 0 8px;display:flex;gap:6px;align-items:center}.info .meta span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .info .bio{font-size:15px;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -527,12 +527,12 @@ function art(seed,g,h,v){
   const top=g==='f'?`<path d="M-102 -445C-112 -575 112 -585 102 -445C92 -505 30 -530 -20 -515C-60 -505 -90 -480 -102 -445Z" fill="url(#hr)"/>`
     :`<path d="M-98 -455C-104 -560 104 -572 98 -455C88 -500 50 -515 0 -512C-50 -515 -86 -500 -98 -455Z" fill="url(#hr)"/>`;
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900"><defs>
-<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="hsl(${h} 55% 66%)"/><stop offset=".55" stop-color="hsl(${h2} 42% 38%)"/><stop offset="1" stop-color="hsl(${h2} 45% 14%)"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="hsl(${h} 55% 66%)"/><stop offset=".55" stop-color="hsl(${h2} 45% 52%)"/><stop offset="1" stop-color="hsl(${h2} 40% 30%)"/></linearGradient>
 <radialGradient id="lt" cx="${lx/600}" cy=".26" r=".55"><stop offset="0" stop-color="hsl(${h+15} 95% 92%)" stop-opacity=".95"/><stop offset="1" stop-color="hsl(${h} 90% 80%)" stop-opacity="0"/></radialGradient>
 <radialGradient id="sk" cx="${lx>300?.68:.32}" cy=".3" r=".9"><stop offset="0" stop-color="hsl(${sk} 55% ${sl+14}%)"/><stop offset=".6" stop-color="hsl(${sk} 42% ${sl}%)"/><stop offset="1" stop-color="hsl(${sk} 38% ${sl-20}%)"/></radialGradient>
 <linearGradient id="hr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="hsl(${20+r()*15} 40% ${hl+10}%)"/><stop offset="1" stop-color="hsl(20 35% ${hl}%)"/></linearGradient>
 <linearGradient id="cl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(${(h2+180)%360} ${20+r()*40}% ${30+r()*35}%)"/><stop offset="1" stop-color="hsl(${(h2+200)%360} 25% 12%)"/></linearGradient>
-<radialGradient id="vg" cx=".5" cy=".45" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
+<radialGradient id="vg" cx=".5" cy=".45" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></radialGradient>
 <filter id="b"><feGaussianBlur stdDeviation="8"/></filter></defs>
 <rect width="600" height="900" fill="url(#bg)"/><rect width="600" height="900" fill="url(#lt)"/><g filter="url(#b)">${bok}</g>${mtn}
 <g transform="translate(${cx} ${v===2?820:900}) scale(${sc})">${longH}
